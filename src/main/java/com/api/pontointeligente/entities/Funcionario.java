@@ -1,9 +1,8 @@
 package com.api.pontointeligente.entities;
 
-import java.beans.Transient;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,11 +20,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.api.pontointeligente.enums.PerfilEnum;
 
 @Entity
-@Table(name = "Funcionario")
+@Table(name = "funcionario")
 public class Funcionario implements Serializable {
 
     private static final long serialVersionUID = -574246207015712518L;
@@ -39,8 +39,8 @@ public class Funcionario implements Serializable {
     private Float qtdHorasTrabalhoDia;
     private Float qtdHorasAlmoco;
     private PerfilEnum perfil;
-    private SimpleDateFormat dataCriacao;
-    private SimpleDateFormat dataAtualizacao;
+    private Date dataCriacao;
+    private Date dataAtualizacao;
     private Empresa empresa;
     private List<Lancamento> lancamentos;
 
@@ -107,7 +107,7 @@ public class Funcionario implements Serializable {
         return Optional.ofNullable(qtdHorasTrabalhoDia);
     }
 
-    public void setHorasTrabalhoDia(Float qtdHorasTrabalhoDia) {
+    public void setQtdHorasTrabalhoDia(Float qtdHorasTrabalhoDia) {
         this.qtdHorasTrabalhoDia = qtdHorasTrabalhoDia;
     }
 
@@ -136,20 +136,20 @@ public class Funcionario implements Serializable {
     }
 
     @Column(name = "data_criacao", nullable = false)
-    public SimpleDateFormat getDataCriacao() {
+    public Date getDataCriacao() {
         return dataCriacao;
     }
 
-    public void setDataCriacao(SimpleDateFormat dataCriacao) {
+    public void setDataCriacao(Date dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
 
     @Column(name = "data_atualizacao", nullable = false)
-    public SimpleDateFormat getDataAtualizacao() {
+    public Date getDataAtualizacao() {
         return dataAtualizacao;
     }
 
-    public void setDataAtualizacao(SimpleDateFormat dataAtualizacao) {
+    public void setDataAtualizacao(Date dataAtualizacao) {
         this.dataAtualizacao = dataAtualizacao;
     }
 
@@ -182,12 +182,12 @@ public class Funcionario implements Serializable {
 
     @PreUpdate
     public void preUpdate() {
-        dataAtualizacao = new SimpleDateFormat("yyyy-M-dd");
+        dataAtualizacao = new Date();
     }
 
     @PrePersist
     public void PrePersist() {
-        final SimpleDateFormat atual = new SimpleDateFormat("yyyy-M-dd");
+        final Date atual = new Date();
         dataCriacao = atual;
         dataAtualizacao = atual;
     }

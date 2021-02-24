@@ -1,7 +1,7 @@
 package com.api.pontointeligente.entities;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,11 +27,11 @@ public class Lancamento implements Serializable {
     private static final long serialVersionUID = 6524560251526772839L;
 
     private Long id;
-    private SimpleDateFormat data;
+    private Date data;
     private String descricao;
     private String localizacao;
-    private SimpleDateFormat dataCriacao;
-    private SimpleDateFormat dataAtualizacao;
+    private Date dataCriacao;
+    private Date dataAtualizacao;
     private TipoEnum tipo;
     private Funcionario funcionario;
     
@@ -49,11 +49,11 @@ public class Lancamento implements Serializable {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data", nullable = false)
-    public SimpleDateFormat getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(SimpleDateFormat data) {
+    public void setData(Date data) {
         this.data = data;
     }
 
@@ -76,20 +76,20 @@ public class Lancamento implements Serializable {
     }
 
     @Column(name = "data_criacao", nullable = false)
-    public SimpleDateFormat getDataCriacao() {
+    public Date getDataCriacao() {
         return dataCriacao;
     }
 
-    public void setDataCriacao(SimpleDateFormat dataCriacao) {
+    public void setDataCriacao(Date dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
 
     @Column(name = "data_atualizacao", nullable = false)
-    public SimpleDateFormat getDataAtualizacao() {
+    public Date getDataAtualizacao() {
         return dataAtualizacao;
     }
 
-    public void setDataAtualizacao(SimpleDateFormat dataAtualizacao) {
+    public void setDataAtualizacao(Date dataAtualizacao) {
         this.dataAtualizacao = dataAtualizacao;
     }
 
@@ -114,12 +114,12 @@ public class Lancamento implements Serializable {
 
     @PreUpdate
     public void preUpdate() {
-        dataAtualizacao = new SimpleDateFormat("yyyy-M-dd");
+        dataAtualizacao = new Date();
     }
 
     @PrePersist
     public void PrePersist() {
-        final SimpleDateFormat atual = new SimpleDateFormat("yyyy-M-dd");
+        final Date atual = new Date();
         dataCriacao = atual;
         dataAtualizacao = atual;
     }

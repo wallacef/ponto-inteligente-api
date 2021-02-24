@@ -1,7 +1,7 @@
 package com.api.pontointeligente.entities;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -25,8 +25,8 @@ public class Empresa implements Serializable {
     private Long id;
     private String razaoSocial;
     private String cnpj;
-    private SimpleDateFormat dataCriacao;
-    private SimpleDateFormat dataAtualizacao;
+    private Date dataCriacao;
+    private Date dataAtualizacao;
     private List<Funcionario> funcionarios;
 
     public Empresa() {}
@@ -60,20 +60,20 @@ public class Empresa implements Serializable {
     }
 
     @Column(name = "data_criacao", nullable = false)
-    public SimpleDateFormat getDataCriacao() {
+    public Date getDataCriacao() {
         return dataCriacao;
     }
 
-    public void setDataCriacao(SimpleDateFormat dataCriacao) {
+    public void setDataCriacao(Date dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
 
     @Column(name = "data_atualizacao", nullable = false)
-    public SimpleDateFormat getDataAtualizacao() {
+    public Date getDataAtualizacao() {
         return dataAtualizacao;
     }
 
-    public void setDataAtualizacao(SimpleDateFormat dataAtualizacao) {
+    public void setDataAtualizacao(Date dataAtualizacao) {
         this.dataAtualizacao = dataAtualizacao;
     }
 
@@ -88,12 +88,12 @@ public class Empresa implements Serializable {
 
     @PreUpdate
     public void preUpdate() {
-        dataAtualizacao = new SimpleDateFormat("yyyy-M-dd");
+        dataAtualizacao = new Date();
     }
 
     @PrePersist
     public void PrePersist() {
-        final SimpleDateFormat atual = new SimpleDateFormat("yyyy-M-dd");
+        final Date atual = new Date();
         dataCriacao = atual;
         dataAtualizacao = atual;
     }
