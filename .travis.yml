@@ -1,9 +1,10 @@
 language: java
 jdk:
   - openjdk8
-before_install:
-  - chmod +x mvnw
-  - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('root') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
-  - sudo service mysql restart  
 services:
   - mysql
+before_install:
+  - chmod +x mvnw
+  - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
+  - sudo mysql -u root --password="" < test/travis.sql
+  - sudo service mysql restart  
